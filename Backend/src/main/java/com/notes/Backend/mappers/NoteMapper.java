@@ -16,6 +16,7 @@ public interface NoteMapper {
     @Mapping(target = "author", source = "author")
     @Mapping(target = "category", source = "category")
     @Mapping(target = "tags", source = "tags")
+    @Mapping(target = "status", source = "status")
     NoteDto toDto(Note note);
 
     CreateNoteRequest toCreateNoteRequest(CreateNoteRequestDto dto);

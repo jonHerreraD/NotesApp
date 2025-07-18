@@ -81,7 +81,7 @@ public class NoteServiceImpl implements NoteService {
         Note newNote = new Note();
         newNote.setTitle(createNoteRequest.getTitle());
         newNote.setContent(createNoteRequest.getContent());
-        newNote.setStatus(createNoteRequest.getNoteStatus());
+        newNote.setStatus(createNoteRequest.getStatus());
         newNote.setAuthor(user);
 
         Category category =
@@ -90,7 +90,7 @@ public class NoteServiceImpl implements NoteService {
 
         Set<UUID> tagIds = createNoteRequest.getTagIds();
         List<Tag> tags = tagService.getTagByIds(tagIds);
-        newNote.setTags(new HashSet<>());
+        newNote.setTags(new HashSet<>(tags));
 
 
         return noteRepository.save(newNote);

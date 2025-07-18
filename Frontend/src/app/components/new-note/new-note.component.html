@@ -1,0 +1,98 @@
+<div class="form-container rounded-2xl p-8 max-w-4xl w-full">
+  <h2 class="text-3xl font-bold text-black mb-8 text-center">Create New Note</h2>
+
+  <form [formGroup]="createNoteForm" (ngSubmit)="onCreateNote()">
+    <!-- Title Input -->
+    <div class="mb-6">
+      <label for="title" class="floating-label block mb-2 text-sm font-medium text-shadow-black">Title</label>
+      <input type="text"
+             id="title"
+             name="title"
+             formControlName="title"
+             class="input-field w-full p-4 text-black text-sm rounded-xl focus:outline-none"
+             placeholder="Enter your note title..."
+             required>
+    </div>
+
+    <!-- Tag and Category Selection -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!-- Tag Selection -->
+      <div class="select-container">
+        <label for="tag" class="floating-label">
+          <span class="tag-icon">🏷️</span>
+          Tag
+        </label>
+        <div class="custom-select">
+          <select id="tag"
+                  name="tag"
+                  formControlName="tagIds">
+            <option value="">Choose your tag...</option>
+            @for (tag of tagList; track $index){
+              <option [value]="tag.id">{{tag.name}}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Category Selection -->
+      <div class="select-container">
+        <label for="category" class="floating-label">
+          <span class="category-icon">📁</span>
+          Category
+        </label>
+        <div class="custom-select">
+          <select id="category"
+                  name="category"
+                  formControlName="categoryId">
+            <option value="">Choose a category...</option>
+            @for (category of categoryList; track $index){
+              <option [value]="category.id">{{category.name}}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div> <!-- ✅ Closed the grid container -->
+
+    <!-- Status Selection - Full Width -->
+    <div class="mb-8">
+      <div class="select-container">
+        <label for="status" class="floating-label">
+          <span class="status-icon">📊</span>
+          Status
+        </label>
+        <div class="custom-select">
+          <select id="status"
+                  name="status"
+                  formControlName="status">
+            <option value="">Choose status...</option>
+            <option [value]="noteStatus.ACTIVE">{{noteStatus.ACTIVE}}</option>
+            <option [value]="noteStatus.ARCHIVED">{{noteStatus.ARCHIVED}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Textarea -->
+    <div class="mb-6">
+      <label for="content" class="floating-label block mb-2 text-sm font-medium text-black">Content</label>
+      <div class="input-field rounded-xl">
+        <textarea id="content"
+                  name="content"
+                  rows="8"
+                  formControlName="content"
+                  class="w-full p-4 text-black text-sm bg-transparent border-0 focus:outline-none resize-none"
+                  placeholder="Write your thoughts here..."
+                  required></textarea>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-center">
+      <button type="submit"
+              class="submit-button px-8 py-3 text-white font-semibold rounded-xl cursor-pointer border-0
+              focus:outline-none focus:ring-4 focus:ring-purple-300">
+        ✨ Create Note
+      </button>
+    </div>
+  </form>
+</div>
