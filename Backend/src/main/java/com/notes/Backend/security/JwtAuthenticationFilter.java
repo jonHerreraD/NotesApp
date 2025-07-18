@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -29,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = extractToken(request);
             if (token != null){
                 UserDetails userDetails = authenticationService.validateToken(token);
-
+                log.info("👤 Usuario autenticado: {}", userDetails.getUsername());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -39,12 +40,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 if (userDetails instanceof NotesUserDetails){
-                    request.setAttribute("userId", ((NotesUserDetails) userDetails).getId());
+                    UUID userId = ((NotesUserDetails) userDetails).getId();
+                    log.info("✅ userId seteado en request: {}", userId);
+                    request.setAttribute("userId", userId);
+                    //request.setAttribute("userId", ((NotesUserDetails) userDetails).getId());
                 }
             }
         }catch (Exception e){
             // Do not throw exceptions, just don't authenticate the user
             log.warn("Recieved invalid auth token");
+            log.warn("⚠️ Token inválido: {}", e.getMessage());
         }
 
 

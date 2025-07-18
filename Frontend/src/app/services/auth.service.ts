@@ -15,6 +15,10 @@ export class AuthService {
       "http://localhost:8080/api/v1/auth/login" ,credentials)
   }
 
+  getToken(): any{
+    return localStorage.getItem('token');
+  }
+
   logout(): void {
     localStorage.removeItem('token');
   }

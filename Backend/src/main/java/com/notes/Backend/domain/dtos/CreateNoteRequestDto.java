@@ -25,7 +25,7 @@ public class CreateNoteRequestDto {
 
     @NotBlank(message = "Content is required")
     @Size(min = 10, max = 50000, message = "Content must be between {min} and {max} characters")
-    private String Content;
+    private String content;
 
     @NotNull(message = "Category ID is required")
     private UUID categoryId;

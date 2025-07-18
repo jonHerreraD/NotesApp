@@ -22,5 +22,5 @@ public class CreateNoteRequest {
     @Builder.Default
     private Set<UUID> tagIds = new HashSet<>();
 
-    private NoteStatus noteStatus;
+    private NoteStatus status;
 }

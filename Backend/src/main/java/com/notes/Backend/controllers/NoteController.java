@@ -50,10 +50,14 @@ public class NoteController {
     public ResponseEntity<NoteDto> createNote(
             @Valid @RequestBody CreateNoteRequestDto createNoteRequestDto,
             @RequestAttribute UUID userId){
+
+
+
         User loggedInUser = userService.getUserById(userId);
          CreateNoteRequest createNoteRequest =
                 noteMapper.toCreateNoteRequest(createNoteRequestDto);
         Note createdNote = noteService.createNote(loggedInUser, createNoteRequest);
+        System.out.println(createdNote.getCategory().getId());
         NoteDto createdNoteDto = noteMapper.toDto(createdNote);
         return  new ResponseEntity<>(createdNoteDto, HttpStatus.CREATED);
     }
