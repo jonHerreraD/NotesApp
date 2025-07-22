@@ -1,0 +1,9 @@
+/* Prevent layout shifts */
+.filter-container {
+  contain: layout;
+}
+
+/* Ensure consistent button heights */
+.filter-button {
+  min-height: 44px;
+}
