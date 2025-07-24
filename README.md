@@ -8,6 +8,7 @@ Phase 1: Note creation
 Phase 2: Tag application and filtering
 
 [Requirements](#requirements)
+[User-Stories](#user-stories)
 [Architecture](#architecture)
 [Entity-Relationship](#entity-relationship-diagram)
 
@@ -15,6 +16,22 @@ Phase 2: Tag application and filtering
 
 ## Requirements
 
+
+## User Stories
+
+### Phase 1
+
+#### User Stories
+- As a user, I want to be able to create, edit, and - delete notes.
+- As a user, I want to archive/unarchive notes.
+- As a user, I want to list my active notes.
+- As a user, I want to list my archived notes.
+
+### Phase 2
+
+#### User Stories
+- As a user, I want to be able to add/remove categories to notes.
+- As a user, I want to be able to filter notes by category.
 
 ## Architecture
 
@@ -24,7 +41,7 @@ This diagram shows a full-stack notes application where a user interacts with an
 
 ## Entity-Relationship Diagram
 
-![Entity-Relationship diagram](/readme-images/image-2.png)
+![Entity-Relationship diagram](/readme-images/Captura%20de%20pantalla%202025-07-24%20142944.png)
 
-This entity-relationship diagram models a note-taking system where each user can create multiple notes and categories. Notes belong to a single user and have a status—either ACTIVE or ARCHIVED—defined by an enumeration called `NoteStatus`. Categories are also user-specific and can be reused across different notes. Notes and categories are connected through a many-to-many relationship using the `Note_Category` associative entity, allowing each note to belong to multiple categories and each category to contain multiple notes. Timestamps (`createdAt`, `updatedAt`) are used throughout to track creation and modification times for notes and categories.
+This entity-relationship diagram represents a note-taking system where a User can create multiple Note entries, each of which belongs to one Category and has a NoteStatus (either ACTIVE or ARCHIVED). Each Note can have multiple Tags through a many-to-many relationship managed by the associative entity Note_Tag. The Note entity stores details like title, content, creation date, and update date, and is connected to other entities to define ownership (by User), classification (by Category), and labeling (via Tags). The diagram ensures normalized data structure, supporting organized, searchable, and categorized note management.
 
