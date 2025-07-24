@@ -15,24 +15,52 @@
     </div>
 
     <!-- Tag and Category Selection -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8" style="position: relative;">
       <!-- Tag Selection -->
-      <div class="select-container">
-        <label for="tag" class="floating-label">
+      <div class="select-container tag-selector-container">
+        <label class="floating-label">
           <span class="tag-icon">🏷️</span>
-          Tag
+          Tags
         </label>
-        <div class="custom-select">
-          <select id="tag"
-                  name="tag"
-                  formControlName="tagIds">
-            <option value="">Choose your tag...</option>
-            @for (tag of tagList; track $index){
-              <option [value]="tag.id">{{tag.name}}</option>
-            }
-          </select>
+
+        <!-- Custom Multi-Select Dropdown -->
+        <div class="custom-multi-select" (click)="toggleTagDropdown()">
+          <div class="selected-tags-display">
+            <div class="selected-tags-container">
+              <!-- Show selected tags as chips -->
+              @if (selectedTags.length > 0) {
+                @for (tag of selectedTags; track tag.id) {
+                  <span class="tag-chip">
+              {{ tag.name }}
+                    <button type="button"
+                            class="tag-remove-btn"
+                            (click)="removeTag($event, tag.id)">×</button>
+            </span>
+                }
+              } @else {
+                <span class="placeholder-text">Choose your tags...</span>
+              }
+            </div>
+            <span class="dropdown-arrow" [class.rotated]="isTagDropdownOpen">▼</span>
+          </div>
+
+          <!-- Dropdown Options -->
+          @if (isTagDropdownOpen) {
+            <div class="dropdown-options">
+              @for (tag of tagList; track tag.id) {
+                <label class="tag-option">
+                  <input type="checkbox"
+                         [checked]="isTagSelected(tag.id)"
+                         (change)="onTagToggle(tag.id, $event)">
+                  <span class="checkmark"></span>
+                  {{ tag.name }}
+                </label>
+              }
+            </div>
+          }
         </div>
       </div>
+
 
       <!-- Category Selection -->
       <div class="select-container">

@@ -14,6 +14,8 @@
                       (click)="changeTab('add')">Add Notes</button>
               <button type="button" class="rounded-md px-3  active:bg-gray-900  py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
                       (click)="changeTab('see')">Your Notes</button>
+              <button type="button" class="rounded-md px-3  active:bg-gray-900  py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+                      (click)="changeTab('cat-tags')">Categories And Tags</button>
             </div>
           </div>
         </div>
@@ -132,6 +134,18 @@
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <!-- Your content -->
           <app-see-notes></app-see-notes>
+        </div>
+      </main>
+    </header>
+  } @else if (currentComponent == "cat-tags"){
+    <header class="bg-white shadow-sm">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Categories And Tags</h1>
+      </div>
+      <main class="flex items-center justify-center">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <!-- Your content -->
+          <app-categories-tags></app-categories-tags>
         </div>
       </main>
     </header>
