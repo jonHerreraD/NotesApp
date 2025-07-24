@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AddNoteComponent} from '../add-note/add-note.component';
 import {SeeNotesComponent} from '../see-notes/see-notes.component';
+import {CategoriesTagsComponent} from '../categories-tags/categories-tags.component';
 
 @Component({
   selector: 'app-main-page',
-  imports: [CommonModule, AddNoteComponent, SeeNotesComponent],
+  imports: [CommonModule, AddNoteComponent, SeeNotesComponent, CategoriesTagsComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })

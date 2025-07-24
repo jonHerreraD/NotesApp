@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginRequest, LoginResponse} from '../model/interface/user';
 import {Observable} from 'rxjs';
 import {CreateNoteRequest, Note, noteCreated, Tag} from '../model/interface/note';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class NoteService {
 
   constructor(private http: HttpClient) { }
 
+  authService = inject(AuthService);
+
   createNote(noteData: CreateNoteRequest): Observable<Note> {
-    const headers = this.getAuthHeaders();
+    const headers = this.authService.getAuthHeaders();
     return this.http.post<Note>(
       "http://localhost:8080/api/v1/notes" ,noteData, {headers});
   }
@@ -23,20 +26,9 @@ export class NoteService {
     )
   }
   getArchivedNotes(): Observable<Note[]> {
-    const headers = this.getAuthHeaders();
+    const headers = this.authService.getAuthHeaders();
     return this.http.get<Note[]>(
       "http://localhost:8080/api/v1/notes/archived", {headers});
   }
-
-
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Match your login component
-
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-  }
-
 
 }

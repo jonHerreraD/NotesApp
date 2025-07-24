@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {LoginRequest, LoginResponse} from '../model/interface/user';
 
@@ -21,5 +21,14 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); // Match your login component
+
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 }

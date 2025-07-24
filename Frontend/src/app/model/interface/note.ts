@@ -63,3 +63,11 @@ export interface CreateNoteRequest {
   status: noteStatus;
 }
 
+export interface CreateCategoryRequest {
+  name: string;
+}
+
+export interface CreateTagRequest {
+  name: string[];
+}
+
