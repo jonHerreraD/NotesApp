@@ -31,4 +31,11 @@ export class NoteService {
       "http://localhost:8080/api/v1/notes/archived", {headers});
   }
 
+  deleteNote(id: string): Observable<void> {
+    const headers = this.authService.getAuthHeaders();
+    return this.http.delete<void>(
+      `http://localhost:8080/api/v1/notes/${id}`, {headers}
+    )
+  }
+
 }
