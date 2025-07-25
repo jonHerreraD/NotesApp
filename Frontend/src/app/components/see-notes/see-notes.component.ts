@@ -48,4 +48,16 @@ export class SeeNotesComponent {
     }
   }
 
+  deleteNote(id: string): void{
+    this.noteService.deleteNote(id).subscribe({
+      next: () => {
+        console.log("Note deleted successfully");
+        this.loadNotes();
+    },
+      error: (err) => {
+        console.error("Error deleting note:", err);
+      }
+    });
+  }
+
 }
