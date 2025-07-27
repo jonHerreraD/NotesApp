@@ -63,6 +63,10 @@ export interface CreateNoteRequest {
   status: noteStatus;
 }
 
+export interface updateNoteRequest extends CreateNoteRequest {
+  id: string;
+}
+
 export interface CreateCategoryRequest {
   name: string;
 }

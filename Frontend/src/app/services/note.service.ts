@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginRequest, LoginResponse} from '../model/interface/user';
 import {Observable} from 'rxjs';
-import {CreateNoteRequest, Note, noteCreated, Tag} from '../model/interface/note';
+import {CreateNoteRequest, Note, noteCreated, Tag, updateNoteRequest} from '../model/interface/note';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -38,4 +38,10 @@ export class NoteService {
     )
   }
 
+  updateNote(id: string, noteData: updateNoteRequest): Observable<Note> {
+    const headers = this.authService.getAuthHeaders();
+    return this.http.put<Note>(
+      `http://localhost:8080/api/v1/notes/${id}`,noteData, {headers}
+    );
+  }
 }
